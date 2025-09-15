@@ -94,8 +94,16 @@ body {
     border-radius: 20px;
     font-weight: 600;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
+}
+
+@keyframes bangkok-pop {
+    0%, 49%, 100% { transform: translate(-50%, -50%) scale(1); }
+    25% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes chiangmai-pop {
+    0%, 50%, 100% { transform: translate(-50%, -50%) scale(1); }
+    75% { transform: translate(-50%, -50%) scale(1.2); }
 }
 
 .city.bangkok {
@@ -104,6 +112,8 @@ body {
     background: #2c5d4f;
     color: white;
     border: 3px solid #2c5d4f;
+    white-space: nowrap;
+    animation: bangkok-pop 4s infinite ease-in-out;
 }
 
 .city.chiangmai {
@@ -112,6 +122,8 @@ body {
     background: #5b8e7d;
     color: white;
     border: 3px solid #5b8e7d;
+    white-space: nowrap;
+    animation: chiangmai-pop 4s infinite ease-in-out;
 }
 
 .content {
