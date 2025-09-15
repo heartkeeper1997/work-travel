@@ -82,76 +82,101 @@
             overflow: hidden;
         }
         
-        .thailand-map {
+        /* --- New Map Animation Styles --- */
+        .map-container svg {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300"><defs><linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%2364b5f6;stop-opacity:0.3" /><stop offset="100%" style="stop-color:%231976d2;stop-opacity:0.1" /></linearGradient></defs><path d="M200 50 L300 30 L400 40 L450 60 L480 100 L460 150 L440 200 L400 250 L350 260 L300 250 L250 240 L200 220 L180 180 L170 140 L180 100 Z" fill="url(%23mapGrad)" stroke="%231976d2" stroke-width="2" opacity="0.7"/></svg>') center/contain no-repeat;
+            width: 100%;
+            height: 100%;
         }
-        
-        .route-line {
-            position: absolute;
-            top: 50%;
-            left: 25%;
-            width: 50%;
-            height: 4px;
-            background: linear-gradient(90deg, #ff6b6b, #ffa726);
-            border-radius: 2px;
-            transform: translateY(-50%);
-            box-shadow: 0 2px 10px rgba(255, 107, 107, 0.4);
-            animation: pulse 2s infinite;
+
+        #route-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw-line 6s ease-in-out infinite;
         }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+
+        @keyframes draw-line {
+            to {
+                stroke-dashoffset: 0;
+            }
         }
         
         .city {
             position: absolute;
+            z-index: 2;
             background: white;
             padding: 8px 16px;
             border-radius: 20px;
             font-weight: 600;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            border: 3px solid #ff6b6b;
+            transform: translate(-50%, -50%);
         }
         
         .city.bangkok {
-            bottom: 30%;
-            left: 20%;
+            top: 68%;
+            left: 25%;
             background: #ff6b6b;
             color: white;
+            border: 3px solid #ff6b6b;
         }
         
         .city.chiangmai {
-            top: 30%;
-            right: 20%;
+            top: 52%;
+            left: 75%;
             background: #ffa726;
             color: white;
+            border: 3px solid #ffa726;
         }
         
-        .car {
+        .cloud {
             position: absolute;
-            top: calc(50% - 15px);
-            font-size: 30px;
-            animation: drive 4s infinite linear;
-            z-index: 10;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 40"><path fill="rgba(255,255,255,0.8)" d="M47.2,22.4c-0.2,0-0.4,0-0.6,0c-0.5-5.8-5.3-10.4-11.2-10.4c-4.6,0-8.6,2.8-10.4,6.8c-0.8-0.2-1.6-0.4-2.4-0.4c-5.5,0-10,4.5-10,10s4.5,10,10,10h24.4c4.4,0,8-3.6,8-8S51.6,22.4,47.2,22.4z"/></svg>');
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.8;
+            animation-name: drift;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
         }
-        
-        @keyframes drive {
-            0% { 
-                left: 20%; 
-                transform: translateX(-50%);
+
+        .cloud1 {
+            width: 80px;
+            height: 50px;
+            top: 20%;
+            left: -100px;
+            animation-duration: 25s;
+            animation-delay: -5s;
+        }
+
+        .cloud2 {
+            width: 60px;
+            height: 40px;
+            top: 50%;
+            left: -80px;
+            animation-duration: 35s;
+            animation-delay: -15s;
+        }
+
+        .cloud3 {
+            width: 100px;
+            height: 60px;
+            top: 75%;
+            left: -120px;
+            animation-duration: 20s;
+        }
+
+        @keyframes drift {
+            from {
+                transform: translateX(0);
             }
-            100% { 
-                left: 70%; 
-                transform: translateX(-50%);
+            to {
+                transform: translateX(920px);
             }
         }
-        
+        /* --- End of New Map Styles --- */
+
         .content {
             padding: 40px;
             background: white;
@@ -356,11 +381,24 @@
         </div>
         
         <div class="map-container">
-            <div class="thailand-map"></div>
-            <div class="route-line"></div>
+            <svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMid slice">
+                <path id="route-path" d="M200,205 C 350,100, 450,100, 600,155" stroke="#ff8c00" stroke-width="5" fill="none" stroke-linecap="round"/>
+                
+                <!-- Airplane Animation Group -->
+                <g>
+                    <g transform="scale(1.4) translate(-12, -12)">
+                         <path fill="#ff8c00" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </g>
+                    <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+                        <mpath href="#route-path"/>
+                    </animateMotion>
+                </g>
+            </svg>
             <div class="city bangkok">🏢 กรุงเทพฯ</div>
             <div class="city chiangmai">🏔️ เชียงใหม่</div>
-            <div class="car">🚗</div>
+            <div class="cloud cloud1"></div>
+            <div class="cloud cloud2"></div>
+            <div class="cloud cloud3"></div>
         </div>
         
         <div class="content">
