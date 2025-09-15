@@ -1,4 +1,19 @@
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
+    // Hide loader and show main content
+    const loader = document.getElementById('loader-wrapper');
+    const posterContainer = document.querySelector('.poster-container');
+    
+    document.body.classList.add('loaded');
+    posterContainer.style.visibility = 'visible';
+
+    // Remove the loader from the DOM after the transition ends
+    setTimeout(() => {
+        if(loader) {
+            loader.remove();
+        }
+    }, 750);
+
+    // Existing logic from DOMContentLoaded
     const musicToggleButton = document.getElementById('musicToggle');
     const backgroundMusic = document.getElementById('background-music');
     const speakerOnIcon = musicToggleButton.querySelector('.icon-speaker-on');
@@ -15,25 +30,25 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     const startAudio = () => {
-        // Try to play
-        backgroundMusic.play().then(() => {
-            // It worked!
-            console.log("Audio is playing automatically.");
-        }).catch(error => {
-            // It failed. We need user interaction.
-            console.log("Autoplay was prevented. Waiting for a click to start audio.");
-            const startAudioOnInteraction = () => {
-                backgroundMusic.play();
-                document.body.removeEventListener('click', startAudioOnInteraction);
-                document.body.removeEventListener('touchstart', startAudioOnInteraction);
-            };
-            document.body.addEventListener('click', startAudioOnInteraction, { once: true });
-            document.body.addEventListener('touchstart', startAudioOnInteraction, { once: true });
-        });
+        const playPromise = backgroundMusic.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log("Audio is playing automatically.");
+                updateIcon();
+            }).catch(error => {
+                console.log("Autoplay was prevented. Waiting for a click to start audio.");
+                const startAudioOnInteraction = () => {
+                    backgroundMusic.play();
+                    document.body.removeEventListener('click', startAudioOnInteraction);
+                    document.body.removeEventListener('touchstart', startAudioOnInteraction);
+                };
+                document.body.addEventListener('click', startAudioOnInteraction, { once: true });
+                document.body.addEventListener('touchstart', startAudioOnInteraction, { once: true });
+            });
+        }
     };
     
     startAudio();
-
 
     musicToggleButton.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -56,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const voteButtonsContainer = document.getElementById('voteButtons');
     const registerBtn = document.getElementById('registerBtn');
 
-
     const countdownDate = new Date("2025-10-25T00:00:00").getTime();
 
     const updateCountdown = () => {
@@ -69,14 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if(registerBtn) {
                registerBtn.classList.add('disabled');
                registerBtn.removeAttribute('href');
+               registerBtn.style.display = 'none';
             }
             if(voteButtonsContainer) {
                 voteButtonsContainer.style.justifyContent = 'center';
             }
-            if(registerBtn) {
-                registerBtn.style.display = 'none';
-            }
-
             return;
         }
 
@@ -94,5 +105,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const countdownInterval = setInterval(updateCountdown, 1000);
     updateCountdown(); 
     updateIcon(); 
-
 });
+

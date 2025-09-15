@@ -1,0 +1,58 @@
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2c3e50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.75s ease, visibility 0.75s ease;
+}
+
+body.loaded #loader-wrapper {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+    color: white;
+    font-size: 1.2em;
+}
+
+.car-loader {
+    width: 200px;
+    height: 60px;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.road {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-image: linear-gradient(to right, white 50%, transparent 50%);
+    background-size: 20px 2px;
+}
+
+.car {
+    font-size: 40px;
+    position: absolute;
+    bottom: -5px; /* Adjust to sit on the road */
+    left: -50px;
+    animation: drive 2.5s ease-in-out infinite;
+}
+
+@keyframes drive {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(250px);
+    }
+}
