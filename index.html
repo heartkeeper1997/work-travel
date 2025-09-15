@@ -335,6 +335,16 @@
                         <polygon points="15,15 5,45 25,45" fill="#2E7D32"/>
                         <rect x="12" y="45" width="6" height="10" fill="#4E342E"/>
                     </g>
+                     <g id="car-icon">
+                        <rect x="0" y="10" width="30" height="10" fill="#e74c3c" rx="2"/>
+                        <rect x="5" y="0" width="20" height="10" fill="#c0392b" rx="2"/>
+                        <circle cx="7" cy="20" r="3" fill="#2c3e50"/>
+                        <circle cx="23" cy="20" r="3" fill="#2c3e50"/>
+                    </g>
+                    <!-- Reverted to the original sharp arrow icon -->
+                    <g id="airplane-icon">
+                       <path fill="#2c5d4f" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </g>
                 </defs>
 
                 <!-- Sky Background -->
@@ -376,7 +386,7 @@
                 <path d="M-10,300 L100,220 L250,260 L400,210 L550,250 L700,200 L810,300 Z" fill="#6E8B90" />
 
                 <!-- Forest -->
-                 <g id="forest">
+                 <g id="forest" transform="translate(0, 15)">
                     <use href="#pine-tree" x="50" y="235" transform="scale(1)" />
                     <use href="#pine-tree" x="150" y="250" transform="scale(0.9)" />
                     <use href="#pine-tree" x="350" y="245" transform="scale(1.2)" />
@@ -384,18 +394,26 @@
                     <use href="#pine-tree" x="750" y="255" transform="scale(1)" />
                 </g>
 
-                <!-- Road -->
-                <path d="M-10,280 C 150,290 300,270 450,285 C 600,300 750,275 810,290" stroke="#a9a9a9" stroke-width="8" fill="none" />
-                <path d="M-10,280 C 150,290 300,270 450,285 C 600,300 750,275 810,290" stroke="#ffffff" stroke-width="1" stroke-dasharray="10 10" fill="none" />
+                <!-- Road and Car -->
+                <g transform="translate(0, 15)">
+                    <path id="road-path" d="M-50,280 C 150,290 300,270 450,285 C 600,300 750,275 850,290" fill="none" />
+                    <path d="M-10,280 C 150,290 300,270 450,285 C 600,300 750,275 810,290" stroke="#a9a9a9" stroke-width="8" fill="none" />
+                    <path d="M-10,280 C 150,290 300,270 450,285 C 600,300 750,275 810,290" stroke="#ffffff" stroke-width="1" stroke-dasharray="10 10" fill="none" />
+                    
+                    <g>
+                        <use href="#car-icon" transform="scale(0.8) translate(-20, -25)"/>
+                        <animateMotion dur="12s" repeatCount="indefinite" rotate="auto">
+                            <mpath href="#road-path"/>
+                        </animateMotion>
+                    </g>
+                </g>
                 
                 <!-- Flight Path -->
                 <path id="route-path" d="M200,205 C 350,100, 450,100, 600,155" stroke="#5b8e7d" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
                 
                 <!-- Airplane -->
                 <g>
-                    <g transform="scale(1.4) translate(-12, -12)">
-                         <path fill="#2c5d4f" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                    </g>
+                    <use href="#airplane-icon" transform="scale(1.4) translate(-12, -12)"/>
                     <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
                         <mpath href="#route-path"/>
                     </animateMotion>
