@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ไปทำงานที่ออฟฟิศเชียงใหม่กัน</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>">
+    
+    <!-- SEO and Social Sharing Meta Tags -->
+    <meta name="description" content="ประกาศการเดินทางไปทำงานที่ออฟฟิศเชียงใหม่ วันที่ 25 ต.ค. – 1 พ.ย. 2568 พร้อมระบบลงทะเบียนและเพลงประกอบ">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://work-travel.vercel.app/">
+    <meta property="og:title" content="ไปทำงานที่ออฟฟิศเชียงใหม่กัน  Chiang Mai Work Trip">
+    <meta property="og:description" content="ประกาศการเดินทางไปทำงานที่ออฟฟิศเชียงใหม่ วันที่ 25 ต.ค. – 1 พ.ย. 2568 พร้อมระบบลงทะเบียนและเพลงประกอบ">
+    <meta property="og:image" content="https://storage.googleapis.com/maker-studio-project-files-prod/ai_art_maker/1726425785084.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://work-travel.vercel.app/">
+    <meta property="twitter:title" content="ไปทำงานที่ออฟฟิศเชียงใหม่กัน Chiang Mai Work Trip">
+    <meta property="twitter:description" content="ประกาศการเดินทางไปทำงานที่ออฟฟิศเชียงใหม่ วันที่ 25 ต.ค. – 1 พ.ย. 2568 พร้อมระบบลงทะเบียนและเพลงประกอบ">
+    <meta property="twitter:image" content="https://storage.googleapis.com/maker-studio-project-files-prod/ai_art_maker/1726425785084.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -688,22 +706,29 @@
                 }
             };
             
-            // Try to autoplay
-            const playPromise = backgroundMusic.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log("Autoplay was prevented. Waiting for user interaction to start audio.");
-                    // Add a one-time click listener to the whole page to start audio
-                    document.body.addEventListener('click', () => {
-                        if (backgroundMusic.paused) {
-                           backgroundMusic.play();
-                        }
-                    }, { once: true });
+            const startAudio = () => {
+                // Try to play
+                backgroundMusic.play().then(() => {
+                    // It worked!
+                    console.log("Audio is playing automatically.");
+                }).catch(error => {
+                    // It failed. We need user interaction.
+                    console.log("Autoplay was prevented. Waiting for a click to start audio.");
+                    const startAudioOnInteraction = () => {
+                        backgroundMusic.play();
+                        document.body.removeEventListener('click', startAudioOnInteraction);
+                        document.body.removeEventListener('touchstart', startAudioOnInteraction);
+                    };
+                    document.body.addEventListener('click', startAudioOnInteraction, { once: true });
+                    document.body.addEventListener('touchstart', startAudioOnInteraction, { once: true });
                 });
-            }
+            };
+            
+            startAudio();
+
 
             musicToggleButton.addEventListener('click', (event) => {
-                event.stopPropagation(); // Prevent the body click listener from firing again
+                event.stopPropagation();
                 if (backgroundMusic.paused) {
                     backgroundMusic.play();
                 } else {
@@ -759,8 +784,8 @@
             };
 
             const countdownInterval = setInterval(updateCountdown, 1000);
-            updateCountdown(); // Initial call
-            updateIcon(); // Set initial icon state
+            updateCountdown(); 
+            updateIcon(); 
         });
     </script>
 </body>
