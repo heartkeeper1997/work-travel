@@ -13,7 +13,7 @@ window.addEventListener('load', () => {
                 loader.remove();
             }
         }, 750); // This duration should match the transition in loader.css
-    }, 3000); // 3-second delay
+    }, 2300); // 3-second delay
 
     // Existing logic from DOMContentLoaded
     const musicToggleButton = document.getElementById('musicToggle');
