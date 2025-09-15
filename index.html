@@ -389,12 +389,20 @@
         }
 
         .poster-footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
             text-align: center;
             padding: 15px;
             background-color: rgba(44, 93, 79, 0.9);
             color: white;
             font-weight: 300;
             font-size: 0.9em;
+        }
+
+        .poster-footer img {
+            vertical-align: middle;
         }
         
         /* --- Responsive Styles --- */
@@ -687,7 +695,8 @@
             </div>
         </div>
         <footer class="poster-footer">
-            by ใจง่าย Gang
+            <img src="https://hitwebcounter.com/counter/counter.php?page=98765432&style=0006&nbdigits=5&type=page&initCount=1" title="จำนวนผู้เข้าชม" alt="Web Counter" border="0">
+            <span>| by ใจง่าย Gang</span>
         </footer>
     </div>
     
@@ -809,6 +818,7 @@
             const countdownInterval = setInterval(updateCountdown, 1000);
             updateCountdown(); 
             updateIcon(); 
+        
         });
     </script>
 </body>
