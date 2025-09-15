@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ประกาศการเดินทางไปเชียงใหม่</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .poster {
+            width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            padding: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateX(-50px) translateY(-50px); }
+            100% { transform: translateX(0px) translateY(0px); }
+        }
+        
+        .title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            font-weight: 400;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .map-container {
+            height: 300px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .thailand-map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300"><defs><linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%2364b5f6;stop-opacity:0.3" /><stop offset="100%" style="stop-color:%231976d2;stop-opacity:0.1" /></linearGradient></defs><path d="M200 50 L300 30 L400 40 L450 60 L480 100 L460 150 L440 200 L400 250 L350 260 L300 250 L250 240 L200 220 L180 180 L170 140 L180 100 Z" fill="url(%23mapGrad)" stroke="%231976d2" stroke-width="2" opacity="0.7"/></svg>') center/contain no-repeat;
+        }
+        
+        .route-line {
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #ffa726);
+            border-radius: 2px;
+            transform: translateY(-50%);
+            box-shadow: 0 2px 10px rgba(255, 107, 107, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        .city {
+            position: absolute;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 3px solid #ff6b6b;
+        }
+        
+        .city.bangkok {
+            bottom: 30%;
+            left: 20%;
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .city.chiangmai {
+            top: 30%;
+            right: 20%;
+            background: #ffa726;
+            color: white;
+        }
+        
+        .plane {
+            position: absolute;
+            top: calc(50% - 15px);
+            left: 45%;
+            font-size: 30px;
+            animation: fly 3s infinite;
+            z-index: 10;
+        }
+        
+        @keyframes fly {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .content {
+            padding: 40px;
+            background: white;
+        }
+        
+        .travel-dates {
+            background: linear-gradient(135deg, #f8f9ff, #e8f0ff);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #ff6b6b;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .dates-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .dates-info {
+            font-size: 1.3em;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .invitation {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            border: 2px solid #ffa726;
+        }
+        
+        .invitation-text {
+            font-size: 1.2em;
+            color: #e65100;
+            font-weight: 500;
+        }
+        
+        .notes {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #6c757d;
+        }
+        
+        .notes-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .note-item {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+            color: #6c757d;
+        }
+        
+        .note-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #ffa726;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .decorative-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 100px;
+            opacity: 0.6;
+            animation: drift 15s infinite linear;
+        }
+        
+        .cloud1 {
+            width: 60px;
+            height: 30px;
+            top: 20%;
+            left: -60px;
+            animation-duration: 20s;
+        }
+        
+        .cloud2 {
+            width: 40px;
+            height: 20px;
+            top: 40%;
+            left: -40px;
+            animation-duration: 25s;
+        }
+        
+        @keyframes drift {
+            from { transform: translateX(0); }
+            to { transform: translateX(860px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="header">
+            <h1 class="title">🧳 ประกาศการเดินทางไปทำงาน</h1>
+            <p class="subtitle">เชียงใหม่</p>
+        </div>
+        
+        <div class="map-container">
+            <div class="thailand-map"></div>
+            <div class="route-line"></div>
+            <div class="city bangkok">🏢 กรุงเทพฯ</div>
+            <div class="city chiangmai">🏔️ เชียงใหม่</div>
+            <div class="plane">✈️</div>
+            
+            <div class="decorative-elements">
+                <div class="cloud cloud1"></div>
+                <div class="cloud cloud2"></div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="travel-dates">
+                <div class="dates-title">
+                    📅 กำหนดการเดินทาง
+                </div>
+                <div class="dates-info">
+                    กรุงเทพฯ → เชียงใหม่<br>
+                    <strong>วันที่ 25 ตุลาคม – 1 พฤศจิกายน 2568</strong>
+                </div>
+            </div>
+            
+            <div class="invitation">
+                <div class="invitation-text">
+                    🙋‍♀️ ขอเชิญผู้ที่ประสงค์จะร่วมเดินทาง<br>
+                    มาลงชื่อเข้าร่วมภายในระยะเวลาที่กำหนด
+                </div>
+            </div>
+            
+            <div class="notes">
+                <div class="notes-title">
+                    📋 หมายเหตุ
+                </div>
+                <div class="note-item">
+                    ผู้ที่เริ่มเดินทางภายหลังวันที่ 25 ตุลาคม หรือผู้ใดที่ประสงค์กลับก่อน กรุณาวางแผนการเดินทางไป–กลับด้วยตนเอง
+                </div>
+                <div class="note-item">
+                    ผู้ที่จะเดินทาง ขอความกรุณา ขออนุญาตหัวหน้าก่อน
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
