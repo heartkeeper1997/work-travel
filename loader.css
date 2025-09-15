@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #2c3e50;
+    background: linear-gradient(to bottom, #87CEEB, #B0E0E6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,40 +19,62 @@ body.loaded #loader-wrapper {
 
 .loader-content {
     text-align: center;
-    color: white;
+    color: #2c3e50;
     font-size: 1.2em;
+    font-weight: 600;
 }
 
-.car-loader {
-    width: 200px;
-    height: 60px;
+.sky-loader {
+    width: 250px;
+    height: 100px;
     position: relative;
     margin-bottom: 15px;
+    overflow: hidden;
 }
 
-.road {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-image: linear-gradient(to right, white 50%, transparent 50%);
-    background-size: 20px 2px;
-}
-
-.car {
+.airplane {
     font-size: 40px;
     position: absolute;
-    bottom: -5px; /* Adjust to sit on the road */
+    top: 50%;
     left: -50px;
-    animation: drive 2.5s ease-in-out infinite;
+    transform: translateY(-50%);
+    animation: fly-across 4s ease-in-out infinite;
 }
 
-@keyframes drive {
+/* .bird {
+    font-size: 20px;
+    position: absolute;
+    opacity: 0.7;
+} */
+
+/* .bird1 {
+    top: 30%;
+    left: -20px;
+    animation: fly-across 5s linear infinite;
+    animation-delay: -1s;
+}
+
+.bird2 {
+    top: 60%;
+    left: -30px;
+    animation: fly-across 4.5s linear infinite;
+    animation-delay: -2s;
+}
+
+.bird3 {
+    top: 45%;
+    left: -40px;
+    animation: fly-across 5.5s linear infinite;
+    animation-delay: -0.5s;
+} */
+
+
+@keyframes fly-across {
     0% {
-        transform: translateX(0);
+        transform: translateX(0) translateY(-50%);
     }
     100% {
-        transform: translateX(250px);
+        transform: translateX(300px) translateY(-50%);
     }
 }
+
