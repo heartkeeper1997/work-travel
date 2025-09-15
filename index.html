@@ -335,15 +335,20 @@
                         <polygon points="15,15 5,45 25,45" fill="#2E7D32"/>
                         <rect x="12" y="45" width="6" height="10" fill="#4E342E"/>
                     </g>
-                     <g id="car-icon">
+                    <g id="car-icon">
                         <rect x="0" y="10" width="30" height="10" fill="#e74c3c" rx="2"/>
                         <rect x="5" y="0" width="20" height="10" fill="#c0392b" rx="2"/>
                         <circle cx="7" cy="20" r="3" fill="#2c3e50"/>
                         <circle cx="23" cy="20" r="3" fill="#2c3e50"/>
                     </g>
-                    <!-- Reverted to the original sharp arrow icon -->
                     <g id="airplane-icon">
-                       <path fill="#2c5d4f" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                       <path fill="#ffffff" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </g>
+                    <g id="bird-icon">
+                        <path d="M-5,0 Q0,-5 5,0 Q0,5 -5,0 Z" fill="black" />
+                    </g>
+                    <g id="cloud-icon">
+                        <path fill="rgba(255,255,255,0.7)" d="M47.2,22.4c-0.2,0-0.4,0-0.6,0c-0.5-5.8-5.3-10.4-11.2-10.4c-4.6,0-8.6,2.8-10.4,6.8c-0.8-0.2-1.6-0.4-2.4-0.4c-5.5,0-10,4.5-10,10s4.5,10,10,10h24.4c4.4,0,8-3.6,8-8S51.6,22.4,47.2,22.4z"/>
                     </g>
                 </defs>
 
@@ -351,7 +356,7 @@
                 <rect width="100%" height="100%" fill="url(#skyGradient)" />
 
                 <!-- Stars -->
-                <g id="stars" opacity="0">
+                <g id="stars">
                     <circle cx="100" cy="50" r="1.5" fill="white"/>
                     <circle cx="200" cy="80" r="1" fill="white"/>
                     <circle cx="350" cy="40" r="1.2" fill="white"/>
@@ -361,7 +366,7 @@
                     <circle cx="50" cy="120" r="1" fill="white"/>
                     <circle cx="250" cy="130" r="1.2" fill="white"/>
                      <circle cx="450" cy="140" r="1.5" fill="white"/>
-                    <animate attributeName="opacity" values="0; 0; 0; 1; 1; 0" dur="20s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.4;0.5;0.7;0.8;1" dur="20s" repeatCount="indefinite" />
                 </g>
 
                 <!-- Sun and Moon -->
@@ -407,16 +412,45 @@
                         </animateMotion>
                     </g>
                 </g>
+
+                <!-- Day/Twilight Birds -->
+                <g id="birds">
+                     <animate attributeName="opacity" values="0;1;0;0;1;0" keyTimes="0;0.25;0.5;0.7;0.85;1" dur="20s" repeatCount="indefinite" />
+                     <use href="#bird-icon" transform="scale(0.8)">
+                         <animateMotion path="M850,50 C 700,80 500,40 300,70" dur="15s" repeatCount="indefinite" rotate="auto" />
+                     </use>
+                     <use href="#bird-icon" transform="scale(0.7)">
+                         <animateMotion path="M850,50 C 700,80 500,40 300,70" dur="15s" begin="-1s" repeatCount="indefinite" rotate="auto" />
+                     </use>
+                      <use href="#bird-icon" transform="scale(0.9)">
+                         <animateMotion path="M850,50 C 700,80 500,40 300,70" dur="15s" begin="-2s" repeatCount="indefinite" rotate="auto" />
+                     </use>
+                </g>
                 
-                <!-- Flight Path -->
-                <path id="route-path" d="M200,205 C 350,100, 450,100, 600,155" stroke="#5b8e7d" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
-                
-                <!-- Airplane -->
-                <g>
-                    <use href="#airplane-icon" transform="scale(1.4) translate(-12, -12)"/>
-                    <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
-                        <mpath href="#route-path"/>
-                    </animateMotion>
+                <!-- Night Flight -->
+                <g id="night-flight">
+                    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.4;0.5;0.7;0.8;1" dur="20s" repeatCount="indefinite" />
+                    
+                    <!-- Night Clouds -->
+                    <g>
+                        <use href="#cloud-icon" x="0" y="80" transform="scale(1.5)">
+                             <animate attributeName="x" from="-100" to="850" dur="18s" begin="-5s" repeatCount="indefinite"/>
+                        </use>
+                        <use href="#cloud-icon" x="0" y="120" transform="scale(1.2)">
+                             <animate attributeName="x" from="-150" to="820" dur="22s" repeatCount="indefinite"/>
+                        </use>
+                    </g>
+
+                    <!-- Flight Path -->
+                    <path id="route-path" d="M200,205 C 350,100, 450,100, 600,155" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
+                    
+                    <!-- Airplane -->
+                    <g>
+                        <use href="#airplane-icon" transform="scale(1.4) translate(-12, -12)"/>
+                        <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+                            <mpath href="#route-path"/>
+                        </animateMotion>
+                    </g>
                 </g>
             </svg>
             <div class="city bangkok">🏢 กรุงเทพฯ</div>
@@ -472,3 +506,4 @@
 
 </body>
 </html>
+
