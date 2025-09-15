@@ -310,6 +310,42 @@
             display: none;
         }
         
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .time-block {
+            background: rgba(44, 93, 79, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            min-width: 70px;
+        }
+
+        .time-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: #2c5d4f;
+            display: block;
+        }
+
+        .time-label {
+            font-size: 0.8em;
+            color: #5b8e7d;
+        }
+
+        .poster-footer {
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(44, 93, 79, 0.9);
+            color: white;
+            font-weight: 300;
+            font-size: 0.9em;
+        }
+        
         /* --- Responsive Styles --- */
         @media (max-width: 820px) {
             body {
@@ -355,6 +391,16 @@
             .city {
                 padding: 6px 12px;
                 font-size: 0.9em;
+            }
+            .countdown-timer {
+                gap: 10px;
+            }
+            .time-block {
+                padding: 8px;
+                min-width: 55px;
+            }
+            .time-number {
+                font-size: 1.5em;
             }
         }
     </style>
@@ -520,7 +566,25 @@
             
             <div class="vote-section">
                 <div class="vote-title">
-                    🗳️ ลงชื่อเข้าร่วมผ่าน Google Form
+                    🗳️ ลงชื่อเข้าร่วมการเดินทาง
+                </div>
+                <div class="countdown-timer" id="countdown">
+                    <div class="time-block">
+                        <span class="time-number" id="days">00</span>
+                        <span class="time-label">วัน</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-number" id="hours">00</span>
+                        <span class="time-label">ชั่วโมง</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-number" id="minutes">00</span>
+                        <span class="time-label">นาที</span>
+                    </div>
+                    <div class="time-block">
+                        <span class="time-number" id="seconds">00</span>
+                        <span class="time-label">วินาที</span>
+                    </div>
                 </div>
                  <p style="text-align: center; margin-bottom: 25px; color: #555; font-size: 1.1em;">
                     กรุณาคลิกปุ่มด้านล่างเพื่อไปยังฟอร์มสำหรับลงชื่อเข้าร่วมการเดินทาง
@@ -564,6 +628,9 @@
                 </div>
             </div>
         </div>
+        <footer class="poster-footer">
+            by ใจง่าย Gang
+        </footer>
     </div>
     
     <audio id="background-music" loop>
@@ -595,7 +662,7 @@
             const speakerOffIcon = musicToggleButton.querySelector('.icon-speaker-off');
 
             const updateIcon = () => {
-                if (backgroundMusic.paused || backgroundMusic.muted) {
+                if (backgroundMusic.paused) {
                     speakerOnIcon.style.display = 'none';
                     speakerOffIcon.style.display = 'inline-block';
                 } else {
@@ -603,30 +670,19 @@
                     speakerOffIcon.style.display = 'none';
                 }
             };
-
-            const startAudio = () => {
-                const playPromise = backgroundMusic.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        console.log("Audio playback started.");
-                        document.body.removeEventListener('click', startAudio);
-                        document.body.removeEventListener('touchstart', startAudio);
-                    }).catch(error => {
-                        console.log("Autoplay was prevented. Waiting for user interaction.");
-                    });
-                }
-            };
-
-            // Attempt to play on load
-            startAudio();
-
-            // Fallback for browsers that require user interaction
-            document.body.addEventListener('click', startAudio, { once: true });
-            document.body.addEventListener('touchstart', startAudio, { once: true });
-
+            
+            // Try to autoplay
+            const playPromise = backgroundMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Autoplay was prevented. Waiting for user interaction to start audio.");
+                    // Add a one-time click listener to the whole page to start audio
+                    document.body.addEventListener('click', () => backgroundMusic.play(), { once: true });
+                });
+            }
 
             musicToggleButton.addEventListener('click', (event) => {
-                event.stopPropagation(); // Prevent the body click listener from firing
+                event.stopPropagation(); // Prevent the body click listener from firing again
                 if (backgroundMusic.paused) {
                     backgroundMusic.play();
                 } else {
@@ -636,9 +692,42 @@
             
             backgroundMusic.addEventListener('play', updateIcon);
             backgroundMusic.addEventListener('pause', updateIcon);
+            
+            // Countdown Timer Logic
+            const countdownElement = document.getElementById('countdown');
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            const voteSection = document.querySelector('.vote-section');
 
-            // Initial state
-            updateIcon();
+
+            const countdownDate = new Date("2025-10-25T00:00:00").getTime();
+
+            const updateCountdown = () => {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    voteSection.innerHTML = "<h3 style='padding: 20px; text-align: center; color: #c0392b;'>หมดเวลาลงทะเบียนแล้ว</h3>";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                daysEl.innerText = String(days).padStart(2, '0');
+                hoursEl.innerText = String(hours).padStart(2, '0');
+                minutesEl.innerText = String(minutes).padStart(2, '0');
+                secondsEl.innerText = String(seconds).padStart(2, '0');
+            };
+
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // Initial call
+            updateIcon(); // Set initial icon state
         });
     </script>
 </body>
