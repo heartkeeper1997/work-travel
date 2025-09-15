@@ -306,7 +306,7 @@
             z-index: 1000;
         }
 
-        .music-toggle .icon-speaker-off {
+        .music-toggle .icon-speaker-on {
             display: none;
         }
         
@@ -596,11 +596,11 @@
 
             const updateIcon = () => {
                 if (backgroundMusic.paused || backgroundMusic.muted) {
-                    speakerOnIcon.style.display = 'inline-block';
-                    speakerOffIcon.style.display = 'none';
-                } else {
                     speakerOnIcon.style.display = 'none';
                     speakerOffIcon.style.display = 'inline-block';
+                } else {
+                    speakerOnIcon.style.display = 'inline-block';
+                    speakerOffIcon.style.display = 'none';
                 }
             };
 
@@ -639,4 +639,3 @@
     </script>
 </body>
 </html>
-
