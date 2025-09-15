@@ -161,6 +161,25 @@
             color: #333;
             font-weight: 500;
         }
+
+        .location-link {
+            display: inline-block;
+            text-decoration: none;
+            color: #2c5d4f;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background-color: rgba(91, 142, 125, 0.1);
+            padding: 2px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(44, 93, 79, 0.2);
+        }
+
+        .location-link:hover {
+            color: white;
+            background-color: #5b8e7d;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transform: translateY(-1px);
+        }
         
         .vote-section {
             background: rgba(255, 248, 225, 0.7);
@@ -591,7 +610,11 @@
                     📅 กำหนดการเดินทาง
                 </div>
                 <div class="dates-info">
-                    กรุงเทพฯ → เชียงใหม่<br>
+                    กรุงเทพฯ → 
+                    <a href="https://maps.app.goo.gl/KVdA1FDkBZQXFtiN6" target="_blank" rel="noopener noreferrer" class="location-link">
+                        เชียงใหม่ 📍
+                    </a>
+                    <br>
                     <strong>วันที่ 25 ตุลาคม – 1 พฤศจิกายน 2568</strong>
                 </div>
             </div>
