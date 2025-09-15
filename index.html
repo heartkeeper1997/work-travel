@@ -566,7 +566,7 @@
         </div>
     </div>
     
-    <audio id="background-music" loop autoplay>
+    <audio id="background-music" loop>
         <source src="audio/แม่กำปอง.mp4" type="audio/mp4">
         Your browser does not support the audio element.
     </audio>
@@ -604,34 +604,38 @@
                 }
             };
 
-            // Try to play, but muted first to pass autoplay policies
-            backgroundMusic.muted = true;
-            let playPromise = backgroundMusic.play();
+            const startAudio = () => {
+                const playPromise = backgroundMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log("Audio playback started.");
+                        document.body.removeEventListener('click', startAudio);
+                        document.body.removeEventListener('touchstart', startAudio);
+                    }).catch(error => {
+                        console.log("Autoplay was prevented. Waiting for user interaction.");
+                    });
+                }
+            };
 
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    // Autoplay started but is muted. User needs to interact to unmute.
-                    // Or we can try to unmute here, but it might fail.
-                }).catch(error => {
-                    console.log("Autoplay was prevented by the browser.");
-                });
-            }
+            // Attempt to play on load
+            startAudio();
 
-            musicToggleButton.addEventListener('click', () => {
+            // Fallback for browsers that require user interaction
+            document.body.addEventListener('click', startAudio, { once: true });
+            document.body.addEventListener('touchstart', startAudio, { once: true });
+
+
+            musicToggleButton.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent the body click listener from firing
                 if (backgroundMusic.paused) {
                     backgroundMusic.play();
-                    backgroundMusic.muted = false;
                 } else {
-                    // If it's playing, just toggle mute state
-                    backgroundMusic.muted = !backgroundMusic.muted;
+                    backgroundMusic.pause();
                 }
-                updateIcon();
             });
             
-            // Sync icon if state changes for other reasons
-            backgroundMusic.onplay = updateIcon;
-            backgroundMusic.onpause = updateIcon;
-            backgroundMusic.onvolumechange = updateIcon;
+            backgroundMusic.addEventListener('play', updateIcon);
+            backgroundMusic.addEventListener('pause', updateIcon);
 
             // Initial state
             updateIcon();
@@ -639,3 +643,4 @@
     </script>
 </body>
 </html>
+
