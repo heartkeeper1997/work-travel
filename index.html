@@ -15,8 +15,7 @@
         
         body {
             font-family: 'Kanit', sans-serif;
-            /* เปลี่ยนจาก URL ภายนอกมาเป็นไฟล์ในโปรเจกต์ */
-            /* Please replace 'images/northern-road.png' with the actual path to your image */
+            /* Please replace 'images/northern-road.jpg.jpg' with the actual path to your image */
             background-image: url('images/northern-road.png');
             background-size: cover;
             background-position: center;
@@ -29,18 +28,22 @@
         }
         
         .poster {
-            /* From fixed width to responsive width */
             width: 100%;
             max-width: 800px; 
-            background: white;
+            /* Updated for transparency and blur effect */
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             overflow: hidden;
             position: relative;
         }
         
         .header {
-            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            /* Updated color scheme to match new background */
+            background: linear-gradient(135deg, #2c5d4f, #5b8e7d);
             padding: 30px;
             text-align: center;
             color: white;
@@ -70,7 +73,7 @@
             margin-bottom: 10px;
             position: relative;
             z-index: 2;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
         
         .subtitle {
@@ -83,12 +86,12 @@
         
         .map-container {
             height: 300px;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            /* Updated background */
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
             position: relative;
             overflow: hidden;
         }
         
-        /* --- New Map Animation Styles --- */
         .map-container svg {
             position: absolute;
             top: 0;
@@ -123,17 +126,17 @@
         .city.bangkok {
             top: 68%;
             left: 25%;
-            background: #ff6b6b;
+            background: #2c5d4f; /* Updated color */
             color: white;
-            border: 3px solid #ff6b6b;
+            border: 3px solid #2c5d4f; /* Updated color */
         }
         
         .city.chiangmai {
             top: 52%;
             left: 75%;
-            background: #ffa726;
+            background: #5b8e7d; /* Updated color */
             color: white;
-            border: 3px solid #ffa726;
+            border: 3px solid #5b8e7d; /* Updated color */
         }
         
         .cloud {
@@ -181,26 +184,26 @@
                 transform: translateX(920px);
             }
         }
-        /* --- End of New Map Styles --- */
 
         .content {
             padding: 40px;
-            background: white;
+            /* Made content background transparent to blend with the poster */
+            background: transparent;
         }
         
         .travel-dates {
-            background: linear-gradient(135deg, #f8f9ff, #e8f0ff);
+            background: rgba(232, 240, 255, 0.7); /* Adjusted alpha */
             padding: 25px;
             border-radius: 15px;
             margin-bottom: 30px;
-            border-left: 5px solid #ff6b6b;
+            border-left: 5px solid #5b8e7d; /* Updated color */
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
         
         .dates-title {
             font-size: 1.5em;
             font-weight: 600;
-            color: #ff6b6b;
+            color: #2c5d4f; /* Updated color */
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -214,19 +217,19 @@
         }
         
         .vote-section {
-            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            background: rgba(255, 248, 225, 0.7); /* Adjusted alpha */
             padding: 30px;
             border-radius: 20px;
             margin-bottom: 30px;
-            border: 3px solid #ffa726;
-            box-shadow: 0 8px 25px rgba(255, 167, 38, 0.15);
+            border: 3px solid #a98778; /* Updated color */
+            box-shadow: 0 8px 25px rgba(169, 135, 120, 0.15);
         }
         
         .vote-title {
             text-align: center;
             font-size: 1.8em;
             font-weight: 700;
-            color: #e65100;
+            color: #2c5d4f; /* Updated color */
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -284,17 +287,18 @@
         }
 
         .vote-results-btn {
-            background: linear-gradient(135deg, #2196F3, #64B5F6);
+            /* Updated color scheme */
+            background: linear-gradient(135deg, #a98778, #8c6d5e);
             color: white;
         }
         
         .vote-results-btn:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 30px rgba(33, 150, 243, 0.4);
+            box-shadow: 0 10px 30px rgba(140, 109, 94, 0.4);
         }
 
         .notes {
-            background: #f8f9fa;
+            background: rgba(248, 249, 250, 0.7); /* Adjusted alpha */
             padding: 25px;
             border-radius: 15px;
             border-left: 5px solid #6c757d;
@@ -323,7 +327,7 @@
             content: '•';
             position: absolute;
             left: 0;
-            color: #ffa726;
+            color: #2c5d4f; /* Updated color */
             font-weight: bold;
             font-size: 1.2em;
         }
@@ -338,6 +342,7 @@
                 width: 100%;
                 border-radius: 0;
                 box-shadow: none;
+                border: none;
             }
             .content {
                 padding: 20px;
@@ -388,12 +393,12 @@
         
         <div class="map-container">
             <svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMid slice">
-                <path id="route-path" d="M200,205 C 350,100, 450,100, 600,155" stroke="#ff8c00" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path id="route-path" d="M200,205 C 350,100, 450,100, 600,155" stroke="#5b8e7d" stroke-width="5" fill="none" stroke-linecap="round"/>
                 
                 <!-- Airplane Animation Group -->
                 <g>
                     <g transform="scale(1.4) translate(-12, -12)">
-                         <path fill="#ff8c00" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                         <path fill="#5b8e7d" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
                     </g>
                     <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
                         <mpath href="#route-path"/>
@@ -453,9 +458,4 @@
 
 </body>
 </html>
-
-
-
-
-
 
