@@ -290,9 +290,9 @@
         }
 
         .music-toggle {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
             width: 50px;
             height: 50px;
             background-color: rgba(44, 93, 79, 0.8);
@@ -303,10 +303,10 @@
             cursor: pointer;
             border: 2px solid white;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            z-index: 20;
+            z-index: 1000;
         }
 
-        .music-toggle .icon-pause {
+        .music-toggle .icon-speaker-off {
             display: none;
         }
         
@@ -564,46 +564,77 @@
                 </div>
             </div>
         </div>
-
-        <div class="music-toggle" id="musicToggle">
-             <span class="icon-play">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 5.5L19 12L5 18.5V5.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </span>
-             <span class="icon-pause">
-                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="6" y="5" width="4" height="14" fill="white"/>
-                    <rect x="14" y="5" width="4" height="14" fill="white"/>
-                </svg>
-            </span>
-        </div>
     </div>
     
-    <!-- Updated to use HTML5 Audio -->
-    <audio id="background-music" loop>
+    <audio id="background-music" loop autoplay>
         <source src="audio/แม่กำปอง.mp4" type="audio/mp4">
         Your browser does not support the audio element.
     </audio>
+
+    <div class="music-toggle" id="musicToggle">
+        <span class="icon-speaker-on">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15.54 8.46C16.48 9.4 17 10.64 17 12C17 13.36 16.48 14.6 15.54 15.54" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </span>
+        <span class="icon-speaker-off">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 9L16 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 9L22 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </span>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const musicToggleButton = document.getElementById('musicToggle');
             const backgroundMusic = document.getElementById('background-music');
-            const playIcon = musicToggleButton.querySelector('.icon-play');
-            const pauseIcon = musicToggleButton.querySelector('.icon-pause');
+            const speakerOnIcon = musicToggleButton.querySelector('.icon-speaker-on');
+            const speakerOffIcon = musicToggleButton.querySelector('.icon-speaker-off');
+
+            const updateIcon = () => {
+                if (backgroundMusic.paused || backgroundMusic.muted) {
+                    speakerOnIcon.style.display = 'inline-block';
+                    speakerOffIcon.style.display = 'none';
+                } else {
+                    speakerOnIcon.style.display = 'none';
+                    speakerOffIcon.style.display = 'inline-block';
+                }
+            };
+
+            // Try to play, but muted first to pass autoplay policies
+            backgroundMusic.muted = true;
+            let playPromise = backgroundMusic.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Autoplay started but is muted. User needs to interact to unmute.
+                    // Or we can try to unmute here, but it might fail.
+                }).catch(error => {
+                    console.log("Autoplay was prevented by the browser.");
+                });
+            }
 
             musicToggleButton.addEventListener('click', () => {
                 if (backgroundMusic.paused) {
                     backgroundMusic.play();
-                    playIcon.style.display = 'none';
-                    pauseIcon.style.display = 'inline-block';
+                    backgroundMusic.muted = false;
                 } else {
-                    backgroundMusic.pause();
-                    playIcon.style.display = 'inline-block';
-                    pauseIcon.style.display = 'none';
+                    // If it's playing, just toggle mute state
+                    backgroundMusic.muted = !backgroundMusic.muted;
                 }
+                updateIcon();
             });
+            
+            // Sync icon if state changes for other reasons
+            backgroundMusic.onplay = updateIcon;
+            backgroundMusic.onpause = updateIcon;
+            backgroundMusic.onvolumechange = updateIcon;
+
+            // Initial state
+            updateIcon();
         });
     </script>
 </body>
