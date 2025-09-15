@@ -1,17 +1,19 @@
 window.addEventListener('load', () => {
-    // Hide loader and show main content
     const loader = document.getElementById('loader-wrapper');
     const posterContainer = document.querySelector('.poster-container');
     
-    document.body.classList.add('loaded');
-    posterContainer.style.visibility = 'visible';
-
-    // Remove the loader from the DOM after the transition ends
+    // Delay for 3 seconds to ensure loader animation is visible
     setTimeout(() => {
-        if(loader) {
-            loader.remove();
-        }
-    }, 750);
+        document.body.classList.add('loaded');
+        posterContainer.style.visibility = 'visible';
+
+        // Remove the loader from the DOM after the fade-out transition ends
+        setTimeout(() => {
+            if(loader) {
+                loader.remove();
+            }
+        }, 750); // This duration should match the transition in loader.css
+    }, 3000); // 3-second delay
 
     // Existing logic from DOMContentLoaded
     const musicToggleButton = document.getElementById('musicToggle');
@@ -49,6 +51,7 @@ window.addEventListener('load', () => {
     };
     
     startAudio();
+
 
     musicToggleButton.addEventListener('click', (event) => {
         event.stopPropagation();
