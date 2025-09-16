@@ -412,6 +412,19 @@ body {
     visibility: visible;
 }
 
+.music-toggle,
+.scroll-top-btn {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.music-toggle:hover,
+.scroll-top-btn:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    background-color: rgba(44, 93, 79, 1); /* เพิ่มความเข้มเวลาชี้ */
+}
+
+
 .countdown-timer {
     display: flex;
     justify-content: center;
