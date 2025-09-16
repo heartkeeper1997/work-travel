@@ -28,9 +28,9 @@ window.addEventListener('load', () => {
     const updateIcon = () => {
         if (backgroundMusic.paused) {
             speakerOnIcon.style.display = 'none';
-            speakerOffIcon.style.display = 'inline-block';
+            speakerOffIcon.style.display = 'flex';
         } else {
-            speakerOnIcon.style.display = 'inline-block';
+            speakerOnIcon.style.display = 'flex';
             speakerOffIcon.style.display = 'none';
         }
     };
