@@ -1,4 +1,7 @@
+import data from './data.json' with { type: 'json' };
+
 window.addEventListener('load', () => {
+    document.title = `${data.title} v${data.version}`;
     const loader = document.getElementById('loader-wrapper');
     const posterContainer = document.querySelector('.poster-container');
     
