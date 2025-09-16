@@ -5,286 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-lang="pageTitle"></title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>">
-    
-    <!-- SEO and Social Sharing Meta Tags -->
     <meta name="description" content="ประกาศการเดินทางไปทำงานที่ออฟฟิศเชียงใหม่ วันที่ 25 ต.ค. – 1 พ.ย. 2568 พร้อมระบบลงทะเบียนและเพลงประกอบ">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://work-travel.vercel.app/">
     <meta property="og:title" content="ไปทำงานที่ออฟฟิศเชียงใหม่กัน  Chiang Mai Work Trip">
-    <meta property="og:description" content="ประกาศการเดินทางไปทำงานที่ออฟฟิศเชียงใหม่ วันที่ 25 ต.ค. – 1 พ.ย. 2568 พร้อมระบบลงทะเบียนและเพลงประกอบ">
-    <meta property="og:image" content="https://storage.googleapis.com/maker-studio-project-files-prod/ai_art_maker/1726425785084.png">
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://work-travel.vercel.app/">
-    <meta property="twitter:title" content="ไปทำงานที่ออฟฟิศเชียงใหม่กัน Chiang Mai Work Trip">
-    <meta property="twitter:description" content="ประกาศการเดินทางไปทำงานที่ออฟฟิศเชียงใหม่ วันที่ 25 ต.ค. – 1 พ.ย. 2568 พร้อมระบบลงทะเบียนและเพลงประกอบ">
-    <meta property="twitter:image" content="https://storage.googleapis.com/maker-studio-project-files-prod/ai_art_maker/1726425785084.png">
-
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Link to external CSS files -->
     <link rel="stylesheet" href="loader.css">
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
 </head>
 <body>
 
-    <!-- Loading Screen -->
-    <div id="loader-wrapper">
-        <div class="loader-content">
-            <div class="sky-loader">
-                <img src="images/airplane.png" alt="airplane" class="airplane" style="width: 50px;">
-            </div>
-            <p data-lang="loadingText">กำลังเดินทาง...</p>
-        </div>
-    </div>
+    <div id="loader-component"></div>
 
     <div class="poster-container" style="visibility: hidden;">
         <div class="poster">
-             <div class="header">
-                 <button class="lang-switcher" id="langSwitcher">EN</button>
-                <h1 class="title" data-lang="headerTitle">🧳 ไปทำงานที่ออฟฟิศเชียงใหม่กัน</h1>
-            </div>
+             <div id="header-component"></div>
             
-            <div class="map-container">
-                <svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMid slice">
-                    <defs>
-                        <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#87CEEB">
-                                <animate attributeName="stop-color" values="#87CEEB; #ff7e5f; #2c3e50; #2c3e50; #ff7e5f; #87CEEB" dur="20s" repeatCount="indefinite"></animate>
-                            </stop>
-                            <stop offset="100%" stop-color="#B0E0E6">
-                                <animate attributeName="stop-color" values="#B0E0E6; #feb47b; #4a6a8a; #4a6a8a; #feb47b; #B0E0E6" dur="20s" repeatCount="indefinite"></animate>
-                            </stop>
-                        </linearGradient>
-                        <radialGradient id="sunGradient">
-                            <stop offset="0%" stop-color="#FFD700" />
-                            <stop offset="100%" stop-color="#FFA500" />
-                        </radialGradient>
-                        <g id="pine-tree">
-                            <polygon points="15,0 0,35 30,35" fill="#1B5E20"/>
-                            <polygon points="15,15 5,45 25,45" fill="#2E7D32"/>
-                            <rect x="12" y="45" width="6" height="10" fill="#4E342E"/>
-                        </g>
-                        <g id="car-icon">
-                            <rect x="0" y="10" width="30" height="10" fill="#e74c3c" rx="2"/>
-                            <rect x="5" y="0" width="20" height="10" fill="#c0392b" rx="2"/>
-                            <circle cx="7" cy="20" r="3" fill="#2c3e50"/>
-                            <circle cx="23" cy="20" r="3" fill="#2c3e50"/>
-                        </g>
-                        <g id="airplane-icon">
-                           <path fill="#ffffff" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                        </g>
-                        <g id="bird-icon">
-                            <path d="M-5,0 Q0,-5 5,0 Q0,5 -5,0 Z" fill="black" />
-                        </g>
-                        <g id="cloud-icon">
-                            <path fill="rgba(255,255,255,0.7)" d="M47.2,22.4c-0.2,0-0.4,0-0.6,0c-0.5-5.8-5.3-10.4-11.2-10.4c-4.6,0-8.6,2.8-10.4,6.8c-0.8-0.2-1.6-0.4-2.4-0.4c-5.5,0-10,4.5-10,10s4.5,10,10,10h24.4c4.4,0,8-3.6,8-8S51.6,22.4,47.2,22.4z"/>
-                        </g>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#skyGradient)" />
-                    <g id="stars">
-                        <circle cx="100" cy="50" r="1.5" fill="white"/>
-                        <circle cx="200" cy="80" r="1" fill="white"/>
-                        <circle cx="350" cy="40" r="1.2" fill="white"/>
-                        <circle cx="500" cy="90" r="1" fill="white"/>
-                        <circle cx="650" cy="60" r="1.5" fill="white"/>
-                        <circle cx="750" cy="100" r="1" fill="white"/>
-                        <circle cx="50" cy="120" r="1" fill="white"/>
-                        <circle cx="250" cy="130" r="1.2" fill="white"/>
-                         <circle cx="450" cy="140" r="1.5" fill="white"/>
-                        <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.4;0.5;0.7;0.8;1" dur="20s" repeatCount="indefinite" />
-                    </g>
-                    <g id="celestial-bodies">
-                        <path id="celestial-path" d="M100,250 C 250,50 550,50 700,250" fill="none"/>
-                        <circle r="30" fill="url(#sunGradient)">
-                            <animateMotion dur="10s" repeatCount="indefinite" rotate="auto">
-                                <mpath href="#celestial-path"/>
-                            </animateMotion>
-                        </circle>
-                        <path fill="white" d="M25,0 A25,25 0 0,0 25,50 A20,20 0 0,1 25,0 Z" transform="translate(-25,-25)">
-                             <animateMotion dur="10s" begin="10s" repeatCount="indefinite" rotate="auto">
-                                <mpath href="#celestial-path"/>
-                            </animateMotion>
-                        </path>
-                    </g>
-                    <path d="M-10,300 L150,180 L300,220 L450,170 L600,210 L750,160 L810,300 Z" fill="#a9c4c7" />
-                    <path d="M-10,300 L100,220 L250,260 L400,210 L550,250 L700,200 L810,300 Z" fill="#6E8B90" />
-                     <g id="forest" transform="translate(0, 15)">
-                        <use href="#pine-tree" x="50" y="235" transform="scale(1)" />
-                        <use href="#pine-tree" x="150" y="250" transform="scale(0.9)" />
-                        <use href="#pine-tree" x="350" y="245" transform="scale(1.2)" />
-                        <use href="#pine-tree" x="650" y="240" transform="scale(1.1)" />
-                        <use href="#pine-tree" x="750" y="255" transform="scale(1)" />
-                    </g>
-                    <g transform="translate(0, 15)">
-                        <path id="road-path" d="M-50,280 C 150,290 300,270 450,285 C 600,300 750,275 850,290" fill="none" />
-                        <path d="M-10,280 C 150,290 300,270 450,285 C 600,300 750,275 810,290" stroke="#a9a9a9" stroke-width="8" fill="none" />
-                        <path d="M-10,280 C 150,290 300,270 450,285 C 600,300 750,275 810,290" stroke="#ffffff" stroke-width="1" stroke-dasharray="10 10" fill="none" />
-                        <g>
-                            <use href="#car-icon" transform="scale(0.8) translate(-20, -25)"/>
-                            <animateMotion dur="12s" repeatCount="indefinite" rotate="auto">
-                                <mpath href="#road-path"/>
-                            </animateMotion>
-                        </g>
-                    </g>
-                    <g id="birds">
-                         <animate attributeName="opacity" values="0;1;0;0;1;0" keyTimes="0;0.25;0.5;0.7;0.85;1" dur="20s" repeatCount="indefinite" />
-                         <use href="#bird-icon" transform="scale(0.8)">
-                             <animateMotion path="M850,50 C 700,80 500,40 300,70" dur="15s" repeatCount="indefinite" rotate="auto" />
-                         </use>
-                         <use href="#bird-icon" transform="scale(0.7)">
-                             <animateMotion path="M850,50 C 700,80 500,40 300,70" dur="15s" begin="-1s" repeatCount="indefinite" rotate="auto" />
-                         </use>
-                          <use href="#bird-icon" transform="scale(0.9)">
-                             <animateMotion path="M850,50 C 700,80 500,40 300,70" dur="15s" begin="-2s" repeatCount="indefinite" rotate="auto" />
-                         </use>
-                    </g>
-                    <g id="night-flight">
-                        <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.4;0.5;0.7;0.8;1" dur="20s" repeatCount="indefinite" />
-                        <g>
-                            <use href="#cloud-icon" x="0" y="80" transform="scale(1.5)">
-                                 <animate attributeName="x" from="-100" to="850" dur="18s" begin="-5s" repeatCount="indefinite"/>
-                            </use>
-                            <use href="#cloud-icon" x="0" y="120" transform="scale(1.2)">
-                                 <animate attributeName="x" from="-150" to="820" dur="22s" repeatCount="indefinite"/>
-                            </use>
-                        </g>
-                        <path id="route-path" d="M200,205 C 350,100, 450,100, 600,155" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
-                        <g>
-                            <use href="#airplane-icon" transform="scale(1.4) translate(-12, -12)"/>
-                            <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
-                                <mpath href="#route-path"/>
-                            </animateMotion>
-                        </g>
-                    </g>
-                </svg>
-                <div class="city bangkok" data-lang="cityBangkok">🏢 กรุงเทพฯ</div>
-                <div class="city chiangmai" data-lang="cityChiangmai">🏔️ เชียงใหม่</div>
-            </div>
+             <div id="map-component"></div>
             
             <div class="content">
-                <div class="travel-dates">
-                    <div class="dates-title" data-lang="datesTitle">
-                        📅 กำหนดการเดินทาง
-                    </div>
-                    <div class="dates-info" data-lang="datesInfo">
-                        กรุงเทพฯ → 
-                        <a href="https://maps.app.goo.gl/KVdA1FDkBZQXFtiN6" target="_blank" rel="noopener noreferrer" class="location-link">
-                            เชียงใหม่ 📍
-                        </a>
-                        <br>
-                        <strong>วันที่ 25 ตุลาคม – 1 พฤศจิกายน 2568</strong>
-                    </div>
-                </div>
+                <div id="travel-dates-component"></div>
                 
-                <div class="vote-section">
-                    <div class="vote-title" data-lang="voteTitle">
-                        🗳️ ลงชื่อเข้าร่วมการเดินทาง
-                    </div>
-                    <div class="countdown-timer" id="countdown">
-                        <div class="time-block">
-                            <span class="time-number" id="days">00</span>
-                            <span class="time-label" data-lang="labelDays">วัน</span>
-                        </div>
-                        <div class="time-block">
-                            <span class="time-number" id="hours">00</span>
-                            <span class="time-label" data-lang="labelHours">ชั่วโมง</span>
-                        </div>
-                        <div class="time-block">
-                            <span class="time-number" id="minutes">00</span>
-                            <span class="time-label" data-lang="labelMinutes">นาที</span>
-                        </div>
-                        <div class="time-block">
-                            <span class="time-number" id="seconds">00</span>
-                            <span class="time-label" data-lang="labelSeconds">วินาที</span>
-                        </div>
-                    </div>
-                     <p style="text-align: center; margin-bottom: 5px; color: #555; font-size: 1.1em;" data-lang="voteDescription">
-                        กรุณาคลิกปุ่มด้านล่างเพื่อไปยังฟอร์มสำหรับลงชื่อเข้าร่วมการเดินทาง
-                    </p>
-                    <p style="text-align: center; margin-bottom: 25px; color: #e74c3c; font-size: 0.9em;" data-lang="voteNote">
-                        <span style="font-weight: bold;">*</span> ปุ่ม "เปิดฟอร์มลงทะเบียน" จะถูกปิดเมื่อสิ้นสุดระยะเวลา
-                    </p>
-                    <div class="vote-buttons" id="voteButtons">
-                         <a id="registerBtn" href="https://docs.google.com/forms/d/e/1FAIpQLSctOwkA0pWIqOI27nPCoz1myb4CZ3h7n0_oUfnovmTnBgXkPw/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="vote-btn vote-yes">
-                            <span class="icon-notepad">📝</span>
-                            <span class="icon-pencil">✏️</span>
-                            <span data-lang="registerBtnText">เปิดฟอร์มลงทะเบียน</span>
-                        </a>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSctOwkA0pWIqOI27nPCoz1myb4CZ3h7n0_oUfnovmTnBgXkPw/viewanalytics" target="_blank" rel="noopener noreferrer" class="vote-btn vote-results-btn">
-                            <span class="icon-closed">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
-                                    <path d="M2 12C2 12 5 7 12 7C19 7 22 12 22 12C22 12 19 17 12 17C5 17 2 12 2 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M3 15L21 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </span>
-                            <span class="icon-open">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
-                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <circle cx="12" cy="12" r="3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </span>
-                            <span data-lang="resultsBtnText">ดูผลลัพธ์</span>
-                        </a>
-                    </div>
-                </div>
+                <div id="vote-section-component"></div>
                 
-                <div class="notes">
-                    <div class="notes-title" data-lang="notesTitle">
-                        📋 หมายเหตุ
-                    </div>
-                    <div class="note-item" data-lang="noteItem1">
-                        มีที่พักสำหรับการนอนภายในบริเวณออฟฟิศที่เชียงใหม่
-                    </div>
-                    <div class="note-item" data-lang="noteItem2">
-                        ผู้ที่เริ่มเดินทางภายหลังวันที่ 25 ตุลาคม หรือผู้ใดที่ประสงค์กลับก่อน กรุณาวางแผนการเดินทางไป–กลับด้วยตนเอง
-                    </div>
-                    <div class="note-item" data-lang="noteItem3">
-                        <b>สำคัญมาก:</b> ผู้ที่จะเดินทาง ขอความกรุณา ขออนุญาตหัวหน้าก่อน
-                    </div>
-                </div>
+                <div id="notes-component"></div>
             </div>
-            <footer class="poster-footer">
-                <div class="footer-group">
-                    <img src="images/jai-gai-gang-logo.png" alt="ใจง่าย Gang Logo" class="footer-logo">
-                    <span data-lang="footerCredit">By ใจง่าย Gang</span>
-                </div>
-                <div class="footer-group">
-                    <img src="images/zealtech-logo.png" alt="ZealTech Logo" class="footer-logo">
-                    <span data-lang="footerCompany">Zealtech International Co. Ltd</span>
-                </div>
-            </footer>
+
+            <div id="footer-component"></div>
         </div>
     </div>
     
-    <audio id="background-music" loop>
-        <source src="audio/แม่กำปอง.mp4" type="audio/mp4">
-        Your browser does not support the audio element.
-    </audio>
+    <div id="audio-controls-component"></div>
 
-    <div class="music-toggle" id="musicToggle">
-        <span class="icon-speaker-on">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M15.54 8.46C16.48 9.4 17 10.64 17 12C17 13.36 16.48 14.6 15.54 15.54" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </span>
-        <span class="icon-speaker-off">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M22 9L16 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M16 9L22 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </span>
-    </div>
-    
-    <button id="scrollTopBtn" class="scroll-top-btn" title="กลับไปด้านบน">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 19V5M5 12L12 5L19 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+    <div id="scroll-top-component"></div>
 
-    <!-- Link to external JS file -->
     <script type="module" src="script.js" defer></script>
 </body>
 </html>
-

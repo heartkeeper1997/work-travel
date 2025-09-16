@@ -330,17 +330,19 @@ body {
     font-size: 1.2em;
 }
 
+
+
 .vote-btn .icon-open,
 .vote-results-btn:hover .icon-closed,
 .vote-yes .icon-pencil,
 .vote-yes:hover .icon-notepad {
     display: none;
 }
-
 .vote-results-btn:hover .icon-open,
 .vote-yes:hover .icon-pencil {
     display: inline-block;
 }
+
 
 @keyframes wiggle {
     0%,
@@ -357,6 +359,10 @@ body {
 }
 
 .vote-btn span:first-child {
+    line-height: 0;
+}
+
+.icon-open {
     line-height: 0;
 }
 

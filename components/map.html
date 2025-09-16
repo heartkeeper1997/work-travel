@@ -1,0 +1,29 @@
+<div class="map-container">
+    <svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMid slice">
+        <defs>
+            <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#87CEEB">
+                    <animate attributeName="stop-color" values="#87CEEB; #ff7e5f; #2c3e50; #2c3e50; #ff7e5f; #87CEEB" dur="20s" repeatCount="indefinite"></animate>
+                </stop>
+                <stop offset="100%" stop-color="#B0E0E6">
+                    <animate attributeName="stop-color" values="#B0E0E6; #feb47b; #4a6a8a; #4a6a8a; #feb47b; #B0E0E6" dur="20s" repeatCount="indefinite"></animate>
+                </stop>
+            </linearGradient>
+            <radialGradient id="sunGradient"><stop offset="0%" stop-color="#FFD700" /><stop offset="100%" stop-color="#FFA500" /></radialGradient>
+            <g id="pine-tree"><polygon points="15,0 0,35 30,35" fill="#1B5E20"/><polygon points="15,15 5,45 25,45" fill="#2E7D32"/><rect x="12" y="45" width="6" height="10" fill="#4E342E"/></g>
+            <g id="car-icon"><rect x="0" y="10" width="30" height="10" fill="#e74c3c" rx="2"/><rect x="5" y="0" width="20" height="10" fill="#c0392b" rx="2"/><circle cx="7" cy="20" r="3" fill="#2c3e50"/><circle cx="23" cy="20" r="3" fill="#2c3e50"/></g>
+            <g id="airplane-icon"><path fill="#ffffff" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></g>
+            <g id="bird-icon"><path d="M-5,0 Q0,-5 5,0 Q0,5 -5,0 Z" fill="black" /></g>
+            <g id="cloud-icon"><path fill="rgba(255,255,255,0.7)" d="M47.2,22.4c-0.2,0-0.4,0-0.6,0c-0.5-5.8-5.3-10.4-11.2-10.4c-4.6,0-8.6,2.8-10.4,6.8c-0.8-0.2-1.6-0.4-2.4-0.4c-5.5,0-10,4.5-10,10s4.5,10,10,10h24.4c4.4,0,8-3.6,8-8S51.6,22.4,47.2,22.4z"/></g>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#skyGradient)" />
+        <g id="stars"><circle cx="100" cy="50" r="1.5" fill="white"/><circle cx="200" cy="80" r="1" fill="white"/><circle cx="350" cy="40" r="1.2" fill="white"/><circle cx="500" cy="90" r="1" fill="white"/><circle cx="650" cy="60" r="1.5" fill="white"/><circle cx="750" cy="100" r="1" fill="white"/><circle cx="50" cy="120" r="1" fill="white"/><circle cx="250" cy="130" r="1.2" fill="white"/><circle cx="450" cy="140" r="1.5" fill="white"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.4;0.5;0.7;0.8;1" dur="20s" repeatCount="indefinite" /></g>
+        <g id="celestial-bodies"><path id="celestial-path" d="M100,250 C 250,50 550,50 700,250" fill="none"/><circle r="30" fill="url(#sunGradient)"><animateMotion dur="10s" repeatCount="indefinite" rotate="auto"><mpath href="#celestial-path"/></animateMotion></circle><path fill="white" d="M25,0 A25,25 0 0,0 25,50 A20,20 0 0,1 25,0 Z" transform="translate(-25,-25)"><animateMotion dur="10s" begin="10s" repeatCount="indefinite" rotate="auto"><mpath href="#celestial-path"/></animateMotion></path></g>
+        <path d="M-10,300 L150,180 L300,220 L450,170 L600,210 L750,160 L810,300 Z" fill="#a9c4c7" /><path d="M-10,300 L100,220 L250,260 L400,210 L550,250 L700,200 L810,300 Z" fill="#6E8B90" /><g id="forest" transform="translate(0, 15)"><use href="#pine-tree" x="50" y="235" transform="scale(1)" /><use href="#pine-tree" x="150" y="250" transform="scale(0.9)" /><use href="#pine-tree" x="350" y="245" transform="scale(1.2)" /><use href="#pine-tree" x="650" y="240" transform="scale(1.1)" /><use href="#pine-tree" x="750" y="255" transform="scale(1)" /></g>
+        <g transform="translate(0, 15)"><path id="road-path" d="M-50,280 C 150,290 300,270 450,285 C 600,300 750,275 850,290" fill="none" /><path d="M-10,280 C 150,290 300,270 450,285 C 600,300 750,275 810,290" stroke="#a9a9a9" stroke-width="8" fill="none" /><path d="M-10,280 C 150,290 300,270 450,285 C 600,300 750,275 810,290" stroke="#ffffff" stroke-width="1" stroke-dasharray="10 10" fill="none" /><g><use href="#car-icon" transform="scale(0.8) translate(-20, -25)"/><animateMotion dur="12s" repeatCount="indefinite" rotate="auto"><mpath href="#road-path"/></animateMotion></g></g>
+        <g id="birds"><animate attributeName="opacity" values="0;1;0;0;1;0" keyTimes="0;0.25;0.5;0.7;0.85;1" dur="20s" repeatCount="indefinite" /><use href="#bird-icon" transform="scale(0.8)"><animateMotion path="M850,50 C 700,80 500,40 300,70" dur="15s" repeatCount="indefinite" rotate="auto" /></use><use href="#bird-icon" transform="scale(0.7)"><animateMotion path="M850,50 C 700,80 500,40 300,70" dur="15s" begin="-1s" repeatCount="indefinite" rotate="auto" /></use><use href="#bird-icon" transform="scale(0.9)"><animateMotion path="M850,50 C 700,80 500,40 300,70" dur="15s" begin="-2s" repeatCount="indefinite" rotate="auto" /></use></g>
+        <g id="night-flight"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.4;0.5;0.7;0.8;1" dur="20s" repeatCount="indefinite" /><g><use href="#cloud-icon" x="0" y="80" transform="scale(1.5)"><animate attributeName="x" from="-100" to="850" dur="18s" begin="-5s" repeatCount="indefinite"/></use><use href="#cloud-icon" x="0" y="120" transform="scale(1.2)"><animate attributeName="x" from="-150" to="820" dur="22s" repeatCount="indefinite"/></use></g><path id="route-path" d="M200,205 C 350,100, 450,100, 600,155" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/><g><use href="#airplane-icon" transform="scale(1.4) translate(-12, -12)"/><animateMotion dur="6s" repeatCount="indefinite" rotate="auto"><mpath href="#route-path"/></animateMotion></g></g>
+    </svg>
+    <div class="city bangkok" data-lang="cityBangkok">🏢 กรุงเทพฯ</div>
+    <div class="city chiangmai" data-lang="cityChiangmai">🏔️ เชียงใหม่</div>
+</div>

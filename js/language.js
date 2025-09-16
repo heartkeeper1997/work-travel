@@ -21,7 +21,8 @@ const translations = {
     labelHours: "Hours",
     labelMinutes: "Minutes",
     labelSeconds: "Seconds",
-    loadingText: "Traveling..."
+    loadingText: "Traveling...",
+    footerCompany: "Zealtech International Co. Ltd"
   },
   th: {
     pageTitle: "ไปทำงานที่ออฟฟิศเชียงใหม่กัน",
@@ -45,7 +46,8 @@ const translations = {
     labelHours: "ชั่วโมง",
     labelMinutes: "นาที",
     labelSeconds: "วินาที",
-    loadingText: "กำลังเดินทาง..."
+    loadingText: "กำลังเดินทาง...",
+    footerCompany: "Zealtech International Co. Ltd"
   }
 };
 
@@ -57,17 +59,19 @@ export function initLanguage() {
     currentLang = lang;
     localStorage.setItem('lang', lang);
 
-    document.querySelectorAll('[data-lang]').forEach((el) => {
-      const key = el.getAttribute('data-lang');
-      const text = translations[lang]?.[key];
-      if (!text) return;
+document.querySelectorAll('[data-lang]').forEach((el) => {
+  const key = el.getAttribute('data-lang');
+  const text = translations[lang]?.[key];
+  
+  if (!text) return; // ถ้าหาคำแปลไม่เจอ (text เป็นค่าว่าง) ให้ "return" คือหยุดทำสำหรับ el ตัวนี้ แล้วข้ามไปทำตัวถัดไปใน loop ทันที
 
-      if (['datesInfo', 'noteItem3', 'countdownExpired'].includes(key)) {
-        el.innerHTML = text;
-      } else {
-        el.innerText = text;
-      }
-    });
+  // ถ้าหาเจอ ก็จะทำงานบรรทัดข้างล่างต่อไป
+  if (['datesInfo', 'noteItem3', 'countdownExpired'].includes(key)) {
+    el.innerHTML = text;
+  } else {
+    el.innerText = text;
+  }
+});
 
     document.documentElement.lang = lang;
     langSwitcher.innerText = lang === 'th' ? 'EN' : 'TH';
