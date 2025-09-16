@@ -20,6 +20,7 @@ window.addEventListener('load', () => {
     const backgroundMusic = document.getElementById('background-music');
     const speakerOnIcon = musicToggleButton.querySelector('.icon-speaker-on');
     const speakerOffIcon = musicToggleButton.querySelector('.icon-speaker-off');
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
 
     const updateIcon = () => {
         if (backgroundMusic.paused) {
@@ -108,5 +109,21 @@ window.addEventListener('load', () => {
     const countdownInterval = setInterval(updateCountdown, 1000);
     updateCountdown(); 
     updateIcon(); 
+
+    // Scroll to Top Button Logic
+    window.onscroll = () => {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            scrollTopBtn.classList.add('show');
+        } else {
+            scrollTopBtn.classList.remove('show');
+        }
+    };
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 });
 
