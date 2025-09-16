@@ -1,5 +1,5 @@
 export function initCountdown() {
-  const countdownDate = new Date("2025-10-25T00:00:00").getTime();
+  const countdownDate = new Date("2025-10-20T00:00:00").getTime();
   const daysEl = document.getElementById('days');
   const hoursEl = document.getElementById('hours');
   const minutesEl = document.getElementById('minutes');
