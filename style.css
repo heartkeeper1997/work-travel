@@ -446,6 +446,12 @@ body {
     font-size: 0.9em;
 }
 
+.footer-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .footer-logo {
     width: 30px;
     height: 30px;
@@ -513,6 +519,10 @@ body {
     }
     .time-number {
         font-size: 1.5em;
+    }
+    .poster-footer {
+        flex-direction: column;
+        gap: 5px;
     }
 }
 
